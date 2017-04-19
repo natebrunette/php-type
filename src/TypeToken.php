@@ -92,7 +92,7 @@ final class TypeToken
      * @param string $type
      * @throws \Tebru\PhpType\Exception\MalformedTypeException If the type cannot be processed
      */
-    public function __construct(string $type)
+    public function __construct($type)
     {
         $type = trim($type);
         $this->fullTypeString = $type;
@@ -105,7 +105,7 @@ final class TypeToken
      * @param mixed $variable
      * @return TypeToken
      */
-    public static function createFromVariable($variable): TypeToken
+    public static function createFromVariable($variable)
     {
         /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
         return is_object($variable) ? new self(get_class($variable)) : new self(gettype($variable));
@@ -116,7 +116,7 @@ final class TypeToken
      *
      * @return string
      */
-    public function getRawType(): string
+    public function getRawType()
     {
         return $this->rawType;
     }
@@ -126,7 +126,7 @@ final class TypeToken
      *
      * @return string
      */
-    public function getPhpType(): string
+    public function getPhpType()
     {
         return $this->phpType;
     }
@@ -136,7 +136,7 @@ final class TypeToken
      *
      * @return TypeToken[]
      */
-    public function getGenerics(): array
+    public function getGenerics()
     {
         return $this->genericTypes;
     }
@@ -147,7 +147,7 @@ final class TypeToken
      * @param string $type
      * @return bool
      */
-    public function isA(string $type): bool
+    public function isA($type)
     {
         if ($this->rawType === $type) {
             return true;
@@ -169,7 +169,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isString(): bool
+    public function isString()
     {
         return $this->phpType === self::STRING;
     }
@@ -179,7 +179,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isInteger(): bool
+    public function isInteger()
     {
         return $this->phpType === self::INTEGER;
     }
@@ -189,7 +189,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isFloat(): bool
+    public function isFloat()
     {
         return $this->phpType === self::FLOAT;
     }
@@ -199,7 +199,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isBoolean(): bool
+    public function isBoolean()
     {
         return $this->phpType === self::BOOLEAN;
     }
@@ -209,7 +209,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isArray(): bool
+    public function isArray()
     {
         return $this->phpType === self::HASH;
     }
@@ -219,7 +219,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isObject(): bool
+    public function isObject()
     {
         return $this->phpType === self::OBJECT;
     }
@@ -229,7 +229,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isNull(): bool
+    public function isNull()
     {
         return $this->phpType === self::NULL;
     }
@@ -239,7 +239,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isResource(): bool
+    public function isResource()
     {
         return $this->phpType === self::RESOURCE;
     }
@@ -249,7 +249,7 @@ final class TypeToken
      *
      * @return bool
      */
-    public function isWildcard(): bool
+    public function isWildcard()
     {
         return $this->phpType === self::WILDCARD;
     }
@@ -259,7 +259,7 @@ final class TypeToken
      *
      * @return string
      */
-    public function __toString(): string
+    public function __toString()
     {
         return $this->fullTypeString;
     }
@@ -272,7 +272,7 @@ final class TypeToken
      * @return void
      * @throws \Tebru\PhpType\Exception\MalformedTypeException If the type cannot be processed
      */
-    private function parseType(string $type): void
+    private function parseType($type)
     {
         $start = strpos($type, '<');
         if ($start === false) {
@@ -332,7 +332,7 @@ final class TypeToken
      * @param string $rawType
      * @return void
      */
-    private function setTypes(string $rawType): void
+    private function setTypes($rawType)
     {
         $this->phpType = $this->getNormalizedType($rawType);
 
@@ -364,7 +364,7 @@ final class TypeToken
      * @param string $type
      * @return string
      */
-    private function getNormalizedType(string $type): string
+    private function getNormalizedType($type)
     {
         switch ($type) {
             case 'string':
